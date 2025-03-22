@@ -21,7 +21,20 @@ docker-compose up -d
 ```
 php artisan serve
 ```
+> Сгенерировать ключи шифрования
+```
+php artisan passport:keys
+```
 > Применить все миграции
 ```
 php artisan migrate
 ```
+> затем наполнить БД стартовыми данными
+```
+php artisan db:seed
+```
+> Или выполнить миграцию с флагом ```--seed```:
+```
+php artisan migrate --seed
+```
+
