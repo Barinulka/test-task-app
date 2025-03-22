@@ -20,6 +20,8 @@ Content-Type: application/json
     "password": "string"
 }
 
+```
+
 ## Выход (logout)
 ```
 POST /api/logout HTTP/1.1
