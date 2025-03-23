@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\RegistrationController;
+use App\Http\Controllers\Api\SessionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
@@ -16,26 +17,21 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/register', [RegistrationController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')
-    ->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
-Route::group(
-    [
-        'as' => 'passport.',
-        'prefix' => 'passport'
-    ],
-    function () {
+Route::group(['middleware' => 'auth:api', 'prefix' => 'session'], function () {
+    Route::get('/active', [SessionController::class, 'activeSession']);
+    Route::delete('/revoke/{tokenId}', [SessionController::class, 'revokeSession']);
+});
+
+
+Route::group(['as' => 'passport.','prefix' => 'passport'], function () {
         Route::post('/token', [AccessTokenController::class, 'issueToken']);
         Route::post('/token/refresh', [AccessTokenController::class, 'refreshToken']);
     }
 );
 
-Route::group(
-    [
-        'prefix' => 'passport',
-        'namespace' => '\Laravel\Passport\Http\Controllers',
-        'middleware' => 'auth:api',
-    ],
+Route::group(['prefix' => 'passport','namespace' => '\Laravel\Passport\Http\Controllers','middleware' => 'auth:api',],
     function () {
         Route::get('/tokens', [AuthorizedAccessTokenController::class, 'tokens']);
         Route::delete('/tokens/{token_id}', [AuthorizedAccessTokenController::class, 'revokeToken']);

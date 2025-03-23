@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthService
 {
@@ -17,16 +18,16 @@ class AuthService
             $user = Auth::user();
             $token = $user->createToken('authToken')->accessToken;
 
-            return new JsonResponse(['token' => $token], 200);
+            return new JsonResponse(['token' => $token], Response::HTTP_OK);
         }
 
-        return new JsonResponse(['error' => 'Неверные данные для входа', 401]);
+        return new JsonResponse(['error' => 'Неверные данные для входа', Response::HTTP_UNAUTHORIZED]);
     }
 
     public function logout(Request $request): JsonResponse
     {
         $request->user()->token()->revoke();
 
-        return new JsonResponse([], 204);
+        return new JsonResponse([], Response::HTTP_NO_CONTENT);
     }
 }
