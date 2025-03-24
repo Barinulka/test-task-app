@@ -5,6 +5,7 @@ namespace App\Models;
 use Database\Factories\PartnershipFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Partnership extends Model
 {
@@ -17,8 +18,13 @@ class Partnership extends Model
         'name',
     ];
 
-    public function users()
+    public function users(): HasMany
     {
         return $this->hasMany(User::class);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }

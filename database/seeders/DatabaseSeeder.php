@@ -16,7 +16,12 @@ class DatabaseSeeder extends Seeder
        $this->call([
            PassportClientSeeder::class,
            PartnershipSeeder::class,
-           UserSeeder::class
+           OrderTypeSeeder::class,
+           UserSeeder::class,
+           OrderSeeder::class,
+           WorkerSeeder::class,
+           OrderWorkerSeeder::class,
+           WorkerExOrderTypeSeeder::class,
        ]);
     }
 }
