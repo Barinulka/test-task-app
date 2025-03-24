@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\OrderType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class OrderTypeSeeder extends Seeder
 {
@@ -13,6 +14,12 @@ class OrderTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        OrderType::factory(10)->create();
+        foreach(['Погрузка/Разгрузка', 'Такелажные работы', 'Уборка'] as $type) {
+            DB::table('order_types')->insert([
+                'name' => $type,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }
