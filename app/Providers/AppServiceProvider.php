@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Repository\OrderTypeRepository\OrderTypeRepository;
+use App\Repository\OrderTypeRepository\OrderTypeRepositoryInterface;
 use App\Repository\UserRepository\UserRepository;
 use App\Repository\UserRepository\UserRepositoryInterface;
 use App\Service\AuthService\AuthService;
 use App\Service\AuthService\AuthServiceInterface;
+use App\Service\OrderTypeService\OrderTypeService;
+use App\Service\OrderTypeService\OrderTypeServiceInterface;
 use App\Service\RegisterService\RegisterService;
 use App\Service\RegisterService\RegisterServiceInterface;
 use App\Service\SessionService\SessionService;
@@ -22,12 +26,14 @@ class AppServiceProvider extends ServiceProvider
     {
         Passport::ignoreRoutes();
 
-        /*Repositories*/
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
-
-        /*Services*/
-        $this->app->bind(RegisterServiceInterface::class, RegisterService::class);
         $this->app->bind(AuthServiceInterface::class, AuthService::class);
+
+        $this->app->bind(OrderTypeRepositoryInterface::class, OrderTypeRepository::class);
+        $this->app->bind(OrderTypeServiceInterface::class, OrderTypeService::class);
+
+        $this->app->bind(RegisterServiceInterface::class, RegisterService::class);
+
         $this->app->bind(SessionServiceInterface::class, SessionService::class);
     }
 
