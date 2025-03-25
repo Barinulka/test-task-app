@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repository\OrderRepository\OrderRepository;
+use App\Repository\OrderRepository\OrderRepositoryInterface;
 use App\Repository\OrderTypeRepository\OrderTypeRepository;
 use App\Repository\OrderTypeRepository\OrderTypeRepositoryInterface;
 use App\Repository\PartnershipRepository\PartnershipRepository;
@@ -10,6 +12,8 @@ use App\Repository\UserRepository\UserRepository;
 use App\Repository\UserRepository\UserRepositoryInterface;
 use App\Service\AuthService\AuthService;
 use App\Service\AuthService\AuthServiceInterface;
+use App\Service\OrderService\OrderService;
+use App\Service\OrderService\OrderServiceInterface;
 use App\Service\OrderTypeService\OrderTypeService;
 use App\Service\OrderTypeService\OrderTypeServiceInterface;
 use App\Service\PartnershipService\PartnershipService;
@@ -45,6 +49,9 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(PartnershipRepositoryInterface::class, PartnershipRepository::class);
         $this->app->bind(PartnershipServiceInterface::class, PartnershipService::class);
+
+        $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
+        $this->app->bind(OrderServiceInterface::class, OrderService::class);
     }
 
     /**

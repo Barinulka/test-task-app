@@ -25,3 +25,20 @@ Authorization: Bearer {token}
 GET /api/users/list HTTP/1.1
 Authorization: Bearer {token}
 ```
+* Добавить заказ
+```
+POST /api/order/create HTTP/1.1
+Content-Type: application/json
+
+
+{
+    "type_id": int - ID order_type,
+    "partnership_id": int - ID pertnership,
+    "user_id": int - ID user,
+    "description": "string" - описание,
+    "date": "string" - дата в формате YYYY-mm-dd,
+    "address": "string" - адрес,
+    "amount":  int - количество,
+    "status": "string" - статус ('created', 'assigned', 'completed')
+}
+```

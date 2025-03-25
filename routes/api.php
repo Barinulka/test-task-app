@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\RegistrationController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\OrderTypeController;
 use App\Http\Controllers\Api\PartnershipController;
 use App\Http\Controllers\Api\SessionController;
@@ -26,6 +27,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/order-types/list', [OrderTypeController::class, 'getList']);
     Route::get('/partnership/list', [PartnershipController::class, 'getList']);
     Route::get('/users/list', [UserController::class, 'getList']);
+
+    Route::post('/order/create', [OrderController::class, 'createOrder']);
 });
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'session'], function () {
