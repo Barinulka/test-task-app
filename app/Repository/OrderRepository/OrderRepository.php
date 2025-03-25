@@ -17,4 +17,14 @@ class OrderRepository implements OrderRepositoryInterface
 
         return $order;
     }
+
+    public function getOrderById(int $id): Order
+    {
+        return $this->model->find($id);
+    }
+
+    public function assignWorkerToOrder(Order $order, array $data): void
+    {
+        $order->workers()->attach($data['worker_id'], ['amount' => $data['amount']]);
+    }
 }

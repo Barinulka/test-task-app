@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class OrderType extends Model
 {
@@ -17,8 +17,8 @@ class OrderType extends Model
         return $this->hasMany(Order::class, 'type_id');
     }
 
-    public function exWorkers(): MorphToMany
+    public function exWorkers(): BelongsToMany
     {
-        return $this->morphedByMany(Worker::class, 'workers_ex_order_types');
+        return $this->belongsToMany(Worker::class, 'workers_ex_order_types', 'order_type_id', 'worker_id');
     }
 }

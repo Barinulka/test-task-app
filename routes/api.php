@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/users/list', [UserController::class, 'getList']);
 
     Route::post('/order/create', [OrderController::class, 'createOrder']);
+    Route::post('/order/assign-worker', [OrderController::class, 'assignWorkerToOrder']);
 });
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'session'], function () {

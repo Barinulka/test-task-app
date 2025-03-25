@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AssignWorkerRequest;
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Service\OrderService\OrderServiceInterface;
@@ -24,5 +25,14 @@ class OrderController extends Controller
         $order = $this->service->saveOrder($validateData);
 
         return response()->json(['id' => $order->id], Response::HTTP_CREATED);
+    }
+
+    public function assignWorkerToOrder(AssignWorkerRequest $request): JsonResponse
+    {
+        $validateData = $request->validated();
+
+        $result = $this->service->assignWorkerToOrder($validateData);
+
+        return response()->json($result, Response::HTTP_OK);
     }
 }

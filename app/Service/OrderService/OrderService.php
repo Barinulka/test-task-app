@@ -16,4 +16,13 @@ class OrderService implements OrderServiceInterface
     {
         return $this->repository->save($data);
     }
+
+    public function assignWorkerToOrder(array $data): array
+    {
+        $order = $this->repository->getOrderById($data['order_id']);
+
+        $this->repository->assignWorkerToOrder($order, $data);
+
+        return ['message' => 'Испольнитель добавлен к заказу'];
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Database\Factories\WorkerFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Worker extends Model
@@ -19,13 +20,14 @@ class Worker extends Model
         'phone',
     ];
 
-    public function orders(): MorphToMany
+    public function orders(): belongsToMany
     {
-        return $this->morphToMany(Order::class, 'order_worker');
+        return $this->belongsToMany(Order::class, 'order_worker', 'worker_id', 'order_id')
+            ->withPivot('amount');
     }
 
-    public function exOrderTypes(): MorphToMany
+    public function exOrderTypes(): BelongsToMany
     {
-        return $this->morphToMany(OrderType::class, 'workers_ex_order_type');
+        return $this->belongsToMany(OrderType::class, 'workers_ex_order_types', 'worker_id', 'order_type_id');
     }
 }
