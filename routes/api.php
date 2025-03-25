@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Auth\RegistrationController;
 use App\Http\Controllers\Api\OrderTypeController;
 use App\Http\Controllers\Api\PartnershipController;
 use App\Http\Controllers\Api\SessionController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
@@ -23,8 +24,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api'
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/order-types/list', [OrderTypeController::class, 'getList']);
-
     Route::get('/partnership/list', [PartnershipController::class, 'getList']);
+    Route::get('/users/list', [UserController::class, 'getList']);
 });
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'session'], function () {

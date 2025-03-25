@@ -18,6 +18,8 @@ use App\Service\RegisterService\RegisterService;
 use App\Service\RegisterService\RegisterServiceInterface;
 use App\Service\SessionService\SessionService;
 use App\Service\SessionService\SessionServiceInterface;
+use App\Service\UserService\UserService;
+use App\Service\UserService\UserServiceInterface;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
 
@@ -31,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         Passport::ignoreRoutes();
 
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(UserServiceInterface::class, UserService::class);
         $this->app->bind(AuthServiceInterface::class, AuthService::class);
 
         $this->app->bind(OrderTypeRepositoryInterface::class, OrderTypeRepository::class);

@@ -3,6 +3,7 @@
 namespace App\Repository\UserRepository;
 
 use App\Models\User;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserRepositoryInterface
@@ -20,5 +21,10 @@ class UserRepository implements UserRepositoryInterface
             'password' => Hash::make($data['password']),
             'partnership_id' => $data['partnership_id'] ?? null,
         ]);
+    }
+
+    public function getList(): Collection
+    {
+        return $this->model->with('partnership')->get();
     }
 }
