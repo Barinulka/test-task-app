@@ -42,3 +42,15 @@ Content-Type: application/json
     "status": "string" - статус ('created', 'assigned', 'completed')
 }
 ```
+* Назначение исполнителя на заказ
+```
+POST /api/order/assign-worker HTTP/1.1
+Content-Type: application/json
+
+
+{
+    "order_id": int - ID заказа,
+    "worker_id": int - ID исполнителя,
+    "amount": int
+}
+```
