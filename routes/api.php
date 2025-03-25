@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\RegistrationController;
+use App\Http\Controllers\Api\OrderTypeController;
 use App\Http\Controllers\Api\SessionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,11 +20,14 @@ Route::post('/register', [RegistrationController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/order-types', [OrderTypeController::class, 'getList']);
+});
+
 Route::group(['middleware' => 'auth:api', 'prefix' => 'session'], function () {
     Route::get('/active', [SessionController::class, 'activeSession']);
     Route::delete('/revoke/{tokenId}', [SessionController::class, 'revokeSession']);
 });
-
 
 Route::group(['as' => 'passport.','prefix' => 'passport'], function () {
         Route::post('/token', [AccessTokenController::class, 'issueToken']);

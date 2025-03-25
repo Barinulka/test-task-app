@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('workers_ex_order_types', function (Blueprint $table) {
-            $table->foreignId('worker_id')->constrained('workers')->onDelete('cascade');
-            $table->foreignId('order_type_id')->constrained('order_types')->onDelete('cascade');
+            $table->foreignId('worker_id')->constrained('workers');
+            $table->foreignId('order_type_id')->constrained('order_types');
             $table->timestamps();
 
             $table->primary(['worker_id', 'order_type_id']);

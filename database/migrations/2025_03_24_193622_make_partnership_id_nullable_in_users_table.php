@@ -12,9 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('partnership_id')->constrained('partnership');
-
-            $table->index(['partnership_id']);
+            $table->foreignId('partnership_id')->nullable()->change();
         });
     }
 
@@ -24,9 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropIndex(['partnership_id']);
-            $table->dropForeign(['partnership_id']);
-            $table->dropColumn('partnership_id');
+            $table->foreignId('partnership_id')->nullable(false)->change();
         });
     }
 };
