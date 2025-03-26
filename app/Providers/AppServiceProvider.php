@@ -10,6 +10,8 @@ use App\Repository\PartnershipRepository\PartnershipRepository;
 use App\Repository\PartnershipRepository\PartnershipRepositoryInterface;
 use App\Repository\UserRepository\UserRepository;
 use App\Repository\UserRepository\UserRepositoryInterface;
+use App\Repository\WorkerRepository\WorkerRepository;
+use App\Repository\WorkerRepository\WorkerRepositoryInterface;
 use App\Service\AuthService\AuthService;
 use App\Service\AuthService\AuthServiceInterface;
 use App\Service\OrderService\OrderService;
@@ -24,6 +26,8 @@ use App\Service\SessionService\SessionService;
 use App\Service\SessionService\SessionServiceInterface;
 use App\Service\UserService\UserService;
 use App\Service\UserService\UserServiceInterface;
+use App\Service\WorkerService\WorkerService;
+use App\Service\WorkerService\WorkerServiceInterface;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
 
@@ -52,6 +56,9 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
         $this->app->bind(OrderServiceInterface::class, OrderService::class);
+
+        $this->app->bind(WorkerRepositoryInterface::class, WorkerRepository::class);
+        $this->app->bind(WorkerServiceInterface::class, WorkerService::class);
     }
 
     /**

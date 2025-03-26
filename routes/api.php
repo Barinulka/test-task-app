@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\OrderTypeController;
 use App\Http\Controllers\Api\PartnershipController;
 use App\Http\Controllers\Api\SessionController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\WorkerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
@@ -27,9 +28,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/order-types/list', [OrderTypeController::class, 'getList']);
     Route::get('/partnership/list', [PartnershipController::class, 'getList']);
     Route::get('/users/list', [UserController::class, 'getList']);
+    Route::get('/worker/list', [WorkerController::class, 'getList']);
 
     Route::post('/order/create', [OrderController::class, 'createOrder']);
     Route::post('/order/assign-worker', [OrderController::class, 'assignWorkerToOrder']);
+    Route::post('/worker/filter', [WorkerController::class, 'getWorkerByOrderTypeIds']);
 });
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'session'], function () {

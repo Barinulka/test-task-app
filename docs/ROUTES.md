@@ -54,3 +54,18 @@ Content-Type: application/json
     "amount": int
 }
 ```
+* Получить список исполнителей
+```
+GET /api/worker/list HTTP/1.1
+Authorization: Bearer {token}
+```
+* Фильтрация исполнителей по типам заказов
+```
+POST /api/worker/filter HTTP/1.1
+Content-Type: application/json
+
+
+{
+    "order_type_ids": [array] - список ID типов заказов
+}
+```
